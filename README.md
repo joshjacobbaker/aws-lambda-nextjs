@@ -38,3 +38,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Deploy on Amazon
 - .zip?
 - ECR? Docker? Deploy to function
+
+## Deploy to ECR & Lambda
+### Authenticate docker cli to aws
+- aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
+### Tag local docker image with remote ECR image tag
+- docker tag nextjs-app:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/nextjs-app:latest
+### Push the local docker image up to ECR image 
+- docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/nextjs-app:latest
