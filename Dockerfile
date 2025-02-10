@@ -1,30 +1,20 @@
-# === Stage 1: Build Next.js App ===
-FROM node:20 AS builder
-
-WORKDIR /app
-
-# Copy package.json and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
-
-# Copy all project files
-COPY . .
-
-# Build Next.js (standalone mode)
-RUN npm run build
-
-# === Stage 2: Create Lambda-Compatible Production Image ===
+# Use the AWS Lambda base image for Node.js
 FROM public.ecr.aws/lambda/nodejs:20
 
+# Set the working directory
 WORKDIR /var/task
 
-# Copy built Next.js app from builder stage
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/static ./.next/static
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Expose port for local testing (ignored by AWS Lambda)
-EXPOSE 3000
+# Install dependencies
+RUN npm install
 
-# Lambda requires a handler
-CMD ["server.handler"]
+# Copy the rest of the application code
+COPY . .
+
+# Build the Next.js app
+RUN npm run build
+
+# Set the Lambda handler
+CMD ["app.handler"]
