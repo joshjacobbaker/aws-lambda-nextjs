@@ -26,7 +26,7 @@ COPY public ./public
 COPY ./lambda.js ./lambda.js  
 
 # Set the entrypoint for Lambda to run the Next.js server as a handler
-ENTRYPOINT ["/usr/local/bin/node", "/var/task/.next/standalone/server.js"]
+ENTRYPOINT ["node", "/var/task/.next/standalone/server.js"]
 
 # Lambda expects the handler to be set to the entry point
 CMD ["exports.handler"]
