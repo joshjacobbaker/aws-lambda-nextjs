@@ -2,7 +2,7 @@
 node_modules/
 
 # Ignore Next.js build artifacts
-.next/
+# .next/
 out/
 
 # Ignore development environment files
