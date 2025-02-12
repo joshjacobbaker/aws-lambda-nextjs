@@ -1,5 +1,6 @@
 # Use the AWS Lambda base image for Node.js
-FROM public.ecr.aws/lambda/nodejs:20
+FROM public.ecr.aws/docker/library/node:20-slim
+COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.7.2 /lambda-adapter /opt/extensions/lambda-adapter
 
 # Set the working directory
 WORKDIR /var/task
@@ -17,4 +18,4 @@ COPY . .
 RUN npm run build
 
 # Set the Lambda handler
-CMD ["app.handler"]
+CMD ["node", "./next/standalone/server.js"]
