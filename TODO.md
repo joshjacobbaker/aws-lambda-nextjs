@@ -3,3 +3,4 @@
 #Lambda
 #aws-amplify
 #codepipeline
+#fargate
