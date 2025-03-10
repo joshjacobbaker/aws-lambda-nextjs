@@ -21,3 +21,4 @@
 #Debounce vs #throttle
 #Modal #InfiniteScroll
 #PaginationFetch
+#SOLID #SRP #OCP #LSP #ISP #DIP
